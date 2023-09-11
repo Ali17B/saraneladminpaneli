@@ -110,7 +110,7 @@ class _IlanEkleState extends State<IlanEkle> {
     super.dispose();
   }
 
-  void _submitForm() {
+  void _submitForm() async {
     if (_formKey.currentState!.validate()) {
       // Görsel alanlarının kontrolü
       if (_uploadedImageUrl1 == null || _uploadedImageUrl2 == null) {
@@ -136,35 +136,34 @@ class _IlanEkleState extends State<IlanEkle> {
         );
         return;
       }
-      CollectionReference sma = FirebaseFirestore.instance.collection('sma');
 
-      sma.add({
-        'aciklama1': adSoyad,
-        'kampanyaTuru': kampanyaTuru,
-        'bagis': tamamlanmaOrani,
-        'banka2': bankaAdi,
-        'iban': iban,
-        'alici': alici,
-        'aciklamasi': aciklama,
-        'ilgiliadSoyad': ilgiliadSoyad,
-        'email': email,
-        'telefonNo': telefonNo,
-        'detayaciklama': ekDetaylar,
-        'image': _uploadedImageUrl1,
-        'ylink': _uploadedImageUrl2,
-      }).then((DocumentReference docRef) async {
-        // Yeni dokümanın ID'sini al
+      try {
+        CollectionReference sma = FirebaseFirestore.instance.collection('sma');
+
+        // Yeni bir doküman ekleyin
+        DocumentReference docRef = await sma.add({
+          'aciklama1': adSoyad,
+          'kampanyaTuru': kampanyaTuru,
+          'bagis': tamamlanmaOrani,
+          'banka2': bankaAdi,
+          'iban': iban,
+          'alici': alici,
+          'aciklamasi': aciklama,
+          'ilgiliadSoyad': ilgiliadSoyad,
+          'email': email,
+          'telefonNo': telefonNo,
+          'detayaciklama': ekDetaylar,
+          'image': _uploadedImageUrl1,
+          'ylink': _uploadedImageUrl2,
+        });
+
         String newDocId = docRef.id;
-
-        // "allsma" koleksiyonundaki belirli bir dokümana erişin
         DocumentReference allSmaDocRef = FirebaseFirestore.instance
             .collection('allsma')
             .doc('7DNg1yOoUq6v2zSXO84K');
 
-        // Mevcut dokümanı getirin
+        // Mevcut dokümanı getirin ve yeni field oluşturun
         DocumentSnapshot allSmaDoc = await allSmaDocRef.get();
-
-        // Yeni field ismini oluşturun
         Map<String, dynamic>? data = allSmaDoc.data() as Map<String, dynamic>?;
         int newFieldNumber = data != null
             ? data.keys.where((k) => k.startsWith('id')).length + 1
@@ -172,45 +171,38 @@ class _IlanEkleState extends State<IlanEkle> {
         String newFieldName = 'id$newFieldNumber';
 
         // Yeni field ismini ve değerini güncelleyin
-        allSmaDocRef.update({newFieldName: newDocId}).then((_) {
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                backgroundColor: Colors.blue.shade800,
-                title: Text("İlan firebase'e eklendi",
-                    style: TextStyle(color: Colors.white)),
-                content: Text(
-                  'naber ali',
-                  style: TextStyle(color: Colors.white),
+        await allSmaDocRef.update({newFieldName: newDocId});
+
+        // Diyalog göster
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              backgroundColor: Colors.blue.shade800,
+              title: Text("İlan firebase'e eklendi",
+                  style: TextStyle(color: Colors.white)),
+              content: Text('naber ali', style: TextStyle(color: Colors.white)),
+              actions: [
+                TextButton(
+                  child: Text('Kapat', style: TextStyle(color: Colors.white)),
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => Anasayfa(),
+                      ),
+                    );
+                  },
                 ),
-                actions: [
-                  TextButton(
-                    child: Text('Kapat', style: TextStyle(color: Colors.white)),
-                    onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => Anasayfa(),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              );
-            },
-          );
-        }).catchError((error) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Bir hata oluştu: $error')),
-          );
-        });
-      }).catchError((error) {
+              ],
+            );
+          },
+        );
+      } catch (error) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Bir hata oluştu: $error')),
         );
-      });
+      }
     } else {
-      // Form doğru bir şekilde doldurulmamışsa, bir hata mesajı gösterilir.
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Lütfen eksik alanları tamamlayın.')),
       );

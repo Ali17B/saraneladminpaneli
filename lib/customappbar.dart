@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:saraneladmin/smaonay.dart';
+import 'package:saraneladmin/smaonaywdg.dart';
+import 'package:saraneladmin/admingirisyap.dart'; // AdminLoginPage için import
 
 import 'ilaneklewdg.dart'; // AuthProvider sınıfını içe aktardığınız dosyanın yolu
 
@@ -33,7 +34,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         TextButton(
           onPressed: () {
             Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => SMAOnaySayfasi()));
+                MaterialPageRoute(builder: (context) => SmaOnayPage()));
           },
           child: Text(
             'SMA Onay',
@@ -42,11 +43,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         TextButton(
           onPressed: () {
-            // Gelen Bildirimler işlevini buraya yazın
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => AdminLoginPage()));
           },
           child: Text(
-            'Gelen Bildirimler',
-            style: TextStyle(color: Colors.white),
+            'Çıkış Yap',
+            style: TextStyle(color: Colors.red),
           ),
         ),
       ],

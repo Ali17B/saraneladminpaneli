@@ -46,12 +46,14 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
             TextField(
               controller: _usernameController,
               decoration: InputDecoration(labelText: 'Kullanıcı Adı'),
+              onSubmitted: (_) => _login(), // Bu satırı ekledik
             ),
             SizedBox(height: 10),
             TextField(
               controller: _passwordController,
               obscureText: true,
               decoration: InputDecoration(labelText: 'Şifre'),
+              onSubmitted: (_) => _login(), // Bu satırı ekledik
             ),
             SizedBox(height: 20),
             ElevatedButton(
