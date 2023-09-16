@@ -12,22 +12,6 @@ class _SmaOnayPageState extends State<SmaOnayPage> {
   final CollectionReference bekleyenler =
       FirebaseFirestore.instance.collection('bekleyenler');
   final CollectionReference sma = FirebaseFirestore.instance.collection('sma');
-  final DocumentReference allsmaDocRef = FirebaseFirestore.instance
-      .collection('allsma')
-      .doc('7DNg1yOoUq6v2zSXO84K');
-
-  Map<String, dynamic>? allsmaDocData;
-
-  Future<void> fetchAllsmaDocData() async {
-    DocumentSnapshot snapshot = await allsmaDocRef.get();
-    allsmaDocData = snapshot.data() as Map<String, dynamic>?;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    fetchAllsmaDocData();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +38,6 @@ class _SmaOnayPageState extends State<SmaOnayPage> {
             rows: data.docs.map((document) {
               return DataRow(cells: [
                 DataCell(Text(document.id), onTap: () {
-                  // Document detaylarını göster
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
@@ -71,11 +54,9 @@ class _SmaOnayPageState extends State<SmaOnayPage> {
                                     elevation: 1,
                                     margin: EdgeInsets.symmetric(vertical: 4),
                                     child: ListTile(
-                                      title: Text(
-                                        '${entry.key}',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ),
+                                      title: Text('${entry.key}',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold)),
                                       subtitle: Text('${entry.value}'),
                                       isThreeLine: true,
                                       dense: false,
@@ -101,24 +82,9 @@ class _SmaOnayPageState extends State<SmaOnayPage> {
                   children: [
                     ElevatedButton(
                       onPressed: () async {
-                        // Onay işlemi
                         try {
-                          await FirebaseFirestore.instance
-                              .runTransaction((transaction) async {
-                            var newDoc = await sma.add(document.data());
-
-                            int fieldNumber = 0;
-                            if (allsmaDocData != null) {
-                              fieldNumber = allsmaDocData!.keys
-                                  .where((k) => k.startsWith('idonaylanmis'))
-                                  .length;
-                            }
-
-                            fieldNumber++;
-                            await transaction.update(allsmaDocRef,
-                                {'idonaylanmis$fieldNumber': newDoc.id});
-                            await transaction.delete(document.reference);
-                          });
+                          await sma.add(document.data());
+                          await document.reference.delete();
                         } catch (e) {
                           // Hata işlemleri burada yapılabilir
                         }
@@ -128,7 +94,6 @@ class _SmaOnayPageState extends State<SmaOnayPage> {
                     SizedBox(width: 8),
                     ElevatedButton(
                       onPressed: () async {
-                        // Red işlemi
                         final bool? isConfirmed = await showDialog(
                           context: context,
                           builder: (BuildContext context) {
@@ -139,15 +104,13 @@ class _SmaOnayPageState extends State<SmaOnayPage> {
                               actions: [
                                 TextButton(
                                   onPressed: () {
-                                    Navigator.of(context).pop(
-                                        false); // Eğer hayır ise, false döner
+                                    Navigator.of(context).pop(false);
                                   },
                                   child: Text('Hayır'),
                                 ),
                                 TextButton(
                                   onPressed: () {
-                                    Navigator.of(context)
-                                        .pop(true); // Eğer evet ise, true döner
+                                    Navigator.of(context).pop(true);
                                   },
                                   child: Text('Evet'),
                                 ),

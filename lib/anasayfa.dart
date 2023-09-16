@@ -39,15 +39,31 @@ class AuthProvider extends ChangeNotifier {
 class Anasayfa extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    /* final authProvider = Provider.of<AuthProvider>(context); */
+    // final authProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
       appBar: CustomAppBar(),
       body: Center(
-          child: Text("Saranel admin panele Hoş Geldiniz",
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/logo.png',
+                height: 100,
+                width:
+                    100), // Logo'nuzu buraya koyun (assets klasörüne logo.png olarak kaydedilmelidir)
+            SizedBox(
+                height:
+                    20), // Logo ve metin arasında biraz boşluk bırakmak için
+            Text(
+              "Saranel admin panele Hoş Geldiniz",
               style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue.shade800))),
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue.shade800,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

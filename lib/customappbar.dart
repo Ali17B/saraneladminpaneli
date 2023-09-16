@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:saraneladmin/bireyselyardimonaywdg.dart';
+import 'package:saraneladmin/bireyselyilanekle.dart';
 import 'package:saraneladmin/smaonaywdg.dart';
 import 'package:saraneladmin/admingirisyap.dart'; // AdminLoginPage için import
 
@@ -33,11 +35,34 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         TextButton(
           onPressed: () {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        BireyselBasvuruEkle())); // IlanEkle widget'ını doğru şekilde içe aktardığınızdan emin olun
+          },
+          child: Text(
+            'BireyselYT Manuel Ekleme',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+        TextButton(
+          onPressed: () {
             Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) => SmaOnayPage()));
           },
           child: Text(
             'SMA Onay',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => bireyselonay()));
+          },
+          child: Text(
+            'Bireysel Onay',
             style: TextStyle(color: Colors.white),
           ),
         ),

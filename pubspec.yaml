@@ -28,6 +28,7 @@ dependencies:
   provider: ^6.0.5
   universal_html: ^2.2.4
   data_table_2: ^2.5.8
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
@@ -35,6 +36,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/logo.png
 
 
   
