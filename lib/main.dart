@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +30,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      onGenerateRoute: (settings) {
+        String? userToken = window.localStorage['userToken'];
+        if (userToken != null) {
+          // Kullanıcı zaten giriş yapmış, AnaSayfa'ya yönlendir
+          return MaterialPageRoute(builder: (context) => Anasayfa());
+        } else {
+          // Kullanıcı giriş yapmamış, GirisSayfasi'na yönlendir
+          return MaterialPageRoute(builder: (context) => AdminLoginPage());
+        }
+      },
       debugShowCheckedModeBanner: false,
       title: 'Saranel Admin Panel',
       theme: ThemeData(

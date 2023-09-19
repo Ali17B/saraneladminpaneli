@@ -90,11 +90,13 @@ class _BireyselBasvuruEkleState extends State<BireyselBasvuruEkle> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue.shade800,
       extendBodyBehindAppBar: true,
-      appBar:
-          CustomAppBar(), // CustomAppBar() kaldırıldı çünkü bu sınıf kodda tanımlı değil
+      appBar: CustomAppBar(
+          currentPage:
+              'BireyselBasvuruEkle'), // CustomAppBar() kaldırıldı çünkü bu sınıf kodda tanımlı değil
       body: Padding(
-        padding: const EdgeInsets.only(top: 25, left: 16, right: 16),
+        padding: const EdgeInsets.only(top: 125, left: 245, right: 245),
         child: Form(
           key: _formKey,
           child: ListView(
@@ -106,8 +108,8 @@ class _BireyselBasvuruEkleState extends State<BireyselBasvuruEkle> {
                   labelText: 'Ad Soyad',
                   labelStyle: TextStyle(
                     color: Colors.blue.shade800,
-                    fontSize: 12,
                     fontWeight: FontWeight.w400,
+                    fontSize: 12,
                   ),
                   filled: true,
                   fillColor: Colors.white,
@@ -119,6 +121,9 @@ class _BireyselBasvuruEkleState extends State<BireyselBasvuruEkle> {
                   return null;
                 },
               ),
+              SizedBox(
+                height: 15,
+              ),
               TextFormField(
                 controller: controllers['aciklama'],
                 cursorColor: Colors.blue.shade800,
@@ -126,8 +131,8 @@ class _BireyselBasvuruEkleState extends State<BireyselBasvuruEkle> {
                   labelText: 'Açıklama',
                   labelStyle: TextStyle(
                     color: Colors.blue.shade800,
-                    fontSize: 12,
                     fontWeight: FontWeight.w400,
+                    fontSize: 12,
                   ),
                   filled: true,
                   fillColor: Colors.white,
@@ -139,6 +144,9 @@ class _BireyselBasvuruEkleState extends State<BireyselBasvuruEkle> {
                   return null;
                 },
               ),
+              SizedBox(
+                height: 15,
+              ),
               TextFormField(
                 controller: controllers['il'],
                 cursorColor: Colors.blue.shade800,
@@ -146,8 +154,8 @@ class _BireyselBasvuruEkleState extends State<BireyselBasvuruEkle> {
                   labelText: 'İl',
                   labelStyle: TextStyle(
                     color: Colors.blue.shade800,
-                    fontSize: 12,
                     fontWeight: FontWeight.w400,
+                    fontSize: 12,
                   ),
                   filled: true,
                   fillColor: Colors.white,
@@ -159,6 +167,9 @@ class _BireyselBasvuruEkleState extends State<BireyselBasvuruEkle> {
                   return null;
                 },
               ),
+              SizedBox(
+                height: 15,
+              ),
               TextFormField(
                 controller: controllers['iletisimadres'],
                 cursorColor: Colors.blue.shade800,
@@ -166,8 +177,8 @@ class _BireyselBasvuruEkleState extends State<BireyselBasvuruEkle> {
                   labelText: 'İletişim Adresi',
                   labelStyle: TextStyle(
                     color: Colors.blue.shade800,
-                    fontSize: 12,
                     fontWeight: FontWeight.w400,
+                    fontSize: 12,
                   ),
                   filled: true,
                   fillColor: Colors.white,

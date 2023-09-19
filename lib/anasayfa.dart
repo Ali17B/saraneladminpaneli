@@ -41,7 +41,7 @@ class Anasayfa extends StatelessWidget {
   Widget build(BuildContext context) {
     // final authProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(currentPage: 'Anasayfa'),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

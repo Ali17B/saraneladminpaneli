@@ -214,7 +214,7 @@ class _IlanEkleState extends State<IlanEkle> {
     return Scaffold(
       backgroundColor: Colors.blue.shade800,
       extendBodyBehindAppBar: true,
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(currentPage: 'IlanEkle'),
       body: Padding(
         padding: const EdgeInsets.only(top: 125, left: 245, right: 245),
         child: Form(
