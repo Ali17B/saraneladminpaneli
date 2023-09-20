@@ -38,27 +38,59 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Admin Girişi')),
+      backgroundColor: Colors.blue.shade800,
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(top: 250, right: 500, left: 500),
         child: Column(
           children: [
-            TextField(
-              controller: _usernameController,
-              decoration: InputDecoration(labelText: 'Kullanıcı Adı'),
-              onSubmitted: (_) => _login(), // Bu satırı ekledik
+            SizedBox(height: 20),
+            Center(
+              child: TextField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  labelText: 'Kullanıcı Adı',
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+                onSubmitted: (_) => _login(),
+              ),
             ),
             SizedBox(height: 10),
             TextField(
               controller: _passwordController,
               obscureText: true,
-              decoration: InputDecoration(labelText: 'Şifre'),
-              onSubmitted: (_) => _login(), // Bu satırı ekledik
+              decoration: InputDecoration(
+                labelText: 'Şifre',
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                  borderRadius:
+                      BorderRadius.circular(30), // Kenarları oval yaptık
+                ),
+              ),
+              onSubmitted: (_) => _login(),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 40),
             ElevatedButton(
               onPressed: _login,
-              child: Text('Giriş Yap'),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(
+                    Colors.blue.shade800), // Arkaplan rengini şeffaf yaptık
+                side: MaterialStateProperty.all(BorderSide(
+                    color: Color.fromARGB(255, 54, 50, 50),
+                    width: 2)), // Çerçeve ekledik
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  borderRadius:
+                      BorderRadius.circular(30), // Kenarları circular 30 yaptık
+                )),
+              ),
+              child: Text(
+                'Giriş Yap',
+                style: TextStyle(
+                    color: Color.fromARGB(255, 54, 50, 50),
+                    fontWeight: FontWeight.bold),
+              ),
             ),
           ],
         ),

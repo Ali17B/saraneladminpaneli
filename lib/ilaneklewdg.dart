@@ -24,7 +24,6 @@ class _IlanEkleState extends State<IlanEkle> {
   bool isImage2Uploaded = false;
 
   String adSoyad = '';
-  String kampanyaTuru = 'SMA';
   String tamamlanmaOrani = '';
   String bankaAdi = '';
   String iban = '';
@@ -95,7 +94,6 @@ class _IlanEkleState extends State<IlanEkle> {
     controllers['telefonNo']?.text = telefonNo;
     controllers['email']?.text = email;
     controllers['adSoyad']?.text = adSoyad;
-    controllers['kampanyaTuru']?.text = kampanyaTuru;
     controllers['tamamlanmaOrani']?.text = tamamlanmaOrani;
     controllers['bankaAdi']?.text = bankaAdi;
     controllers['iban']?.text = iban;
@@ -125,7 +123,6 @@ class _IlanEkleState extends State<IlanEkle> {
           telefonNo.isEmpty ||
           email.isEmpty ||
           adSoyad.isEmpty ||
-          kampanyaTuru.isEmpty ||
           tamamlanmaOrani.isEmpty ||
           bankaAdi.isEmpty ||
           iban.isEmpty ||
@@ -143,7 +140,6 @@ class _IlanEkleState extends State<IlanEkle> {
         // Yeni bir doküman ekleyin
         DocumentReference docRef = await sma.add({
           'aciklama1': adSoyad,
-          'kampanyaTuru': kampanyaTuru,
           'bagis': tamamlanmaOrani,
           'banka2': bankaAdi,
           'iban': iban,
@@ -157,7 +153,7 @@ class _IlanEkleState extends State<IlanEkle> {
           'ylink': _uploadedImageUrl2,
         });
 
-        String newDocId = docRef.id;
+        /* String newDocId = docRef.id;
         DocumentReference allSmaDocRef = FirebaseFirestore.instance
             .collection('allsma')
             .doc('7DNg1yOoUq6v2zSXO84K');
@@ -172,7 +168,7 @@ class _IlanEkleState extends State<IlanEkle> {
 
         // Yeni field ismini ve değerini güncelleyin
         await allSmaDocRef.update({newFieldName: newDocId});
-
+ */
         // Diyalog göster
         showDialog(
           context: context,
@@ -276,13 +272,6 @@ class _IlanEkleState extends State<IlanEkle> {
               Padding(
                 padding: const EdgeInsets.only(top: 20),
                 child: adsoyadinput(),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: Container(
-                  width: 100, // İstediğiniz genişliği ayarlayabilirsiniz.
-                  child: kampanyaturuinput(),
-                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 20, bottom: 40),
@@ -631,37 +620,6 @@ class _IlanEkleState extends State<IlanEkle> {
         final int? oran = int.tryParse(value);
         if (oran == null || oran < 0 || oran > 100) {
           return 'Lütfen 0 ile 100 arasında bir değer girin';
-        }
-        return null;
-      },
-    );
-  }
-
-  DropdownButtonFormField<String> kampanyaturuinput() {
-    return DropdownButtonFormField<String>(
-      value: kampanyaTuru,
-      decoration: InputDecoration(
-        labelText: 'Kampanya Türü',
-        labelStyle: TextStyle(
-          color: Colors.blue.shade800,
-          fontSize: 12,
-          fontWeight: FontWeight.w400,
-        ),
-        filled: true,
-        fillColor: Colors.white,
-      ),
-      items: <String>['SMA'].map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
-      onChanged: (String? newValue) {
-        // Burada seçilen değeri işleyebilirsiniz.
-      },
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Kampanya türü seçilmelidir';
         }
         return null;
       },
