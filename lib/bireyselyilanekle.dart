@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
-import 'package:saraneladmin/customappbar.dart'; // DateTime formatlamak için intl paketini import ettik
+import 'package:saraneladmin/customappbar.dart'; 
 
 class BireyselBasvuruEkle extends StatefulWidget {
   @override
@@ -94,7 +94,7 @@ class _BireyselBasvuruEkleState extends State<BireyselBasvuruEkle> {
       extendBodyBehindAppBar: true,
       appBar: CustomAppBar(
           currentPage:
-              'BireyselBasvuruEkle'), // CustomAppBar() kaldırıldı çünkü bu sınıf kodda tanımlı değil
+              'BireyselBasvuruEkle'), 
       body: Padding(
         padding: const EdgeInsets.only(top: 125, left: 245, right: 245),
         child: Form(

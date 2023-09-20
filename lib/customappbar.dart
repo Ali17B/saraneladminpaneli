@@ -24,7 +24,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Text('SARANEL PLATFORMU'),
       actions: [
         _buildTextButton('Anasayfa', 'Anasayfa', context,
-            Anasayfa()), // Anasayfa widget'ınızın adını 'Anasayfa' olarak varsayıyorum. Lütfen gerçek adıyla değiştirin.
+            Anasayfa()), 
         _buildTextButton('SMA Manuel Ekleme', 'IlanEkle', context, IlanEkle()),
         _buildTextButton('BireyselYT Manuel Ekleme', 'BireyselBasvuruEkle',
             context, BireyselBasvuruEkle()),

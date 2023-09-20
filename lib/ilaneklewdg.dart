@@ -110,15 +110,12 @@ class _IlanEkleState extends State<IlanEkle> {
 
   void _submitForm() async {
     if (_formKey.currentState!.validate()) {
-      // Görsel alanlarının kontrolü
       if (_uploadedImageUrl1 == null || _uploadedImageUrl2 == null) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Lütfen tüm görsel alanlarını doldurunuz.')),
         );
         return;
       }
-
-      // Diğer zorunlu alanların kontrolü
       if (ilgiliadSoyad.isEmpty ||
           telefonNo.isEmpty ||
           email.isEmpty ||
@@ -137,8 +134,7 @@ class _IlanEkleState extends State<IlanEkle> {
       try {
         CollectionReference sma = FirebaseFirestore.instance.collection('sma');
 
-        // Yeni bir doküman ekleyin
-        DocumentReference docRef = await sma.add({
+        /* DocumentReference docRef =  */ await sma.add({
           'aciklama1': adSoyad,
           'bagis': tamamlanmaOrani,
           'banka2': bankaAdi,
@@ -158,7 +154,6 @@ class _IlanEkleState extends State<IlanEkle> {
             .collection('allsma')
             .doc('7DNg1yOoUq6v2zSXO84K');
 
-        // Mevcut dokümanı getirin ve yeni field oluşturun
         DocumentSnapshot allSmaDoc = await allSmaDocRef.get();
         Map<String, dynamic>? data = allSmaDoc.data() as Map<String, dynamic>?;
         int newFieldNumber = data != null
@@ -166,10 +161,8 @@ class _IlanEkleState extends State<IlanEkle> {
             : 1;
         String newFieldName = 'id$newFieldNumber';
 
-        // Yeni field ismini ve değerini güncelleyin
         await allSmaDocRef.update({newFieldName: newDocId});
  */
-        // Diyalog göster
         showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -411,7 +404,7 @@ class _IlanEkleState extends State<IlanEkle> {
               style: TextStyle(color: Colors.white70),
             ),
           ),
-          if (isImage2Uploaded) // Eğer görsel yüklendiyse, onay işaretini göster
+          if (isImage2Uploaded)
             Icon(
               Icons.check_circle,
               color: Colors.green,
@@ -451,7 +444,7 @@ class _IlanEkleState extends State<IlanEkle> {
               style: TextStyle(color: Colors.white70),
             ),
           ),
-          if (isImage1Uploaded) // Eğer görsel yüklendiyse, onay işaretini göster
+          if (isImage1Uploaded)
             Icon(
               Icons.check_circle,
               color: Colors.green,
@@ -466,7 +459,7 @@ class _IlanEkleState extends State<IlanEkle> {
     return TextFormField(
       controller: controllers['ekDetaylar'],
       cursorColor: Colors.blue.shade800,
-      maxLines: null, // Kullanıcının birden fazla satır girebilmesi için
+      maxLines: null,
       decoration: InputDecoration(
         labelText: 'Eklemek İstediğiniz Diğer Detaylar',
         labelStyle: TextStyle(
@@ -478,8 +471,7 @@ class _IlanEkleState extends State<IlanEkle> {
         fillColor: Colors.white,
       ),
       onChanged: (value) {
-        ekDetaylar =
-            value; // Bu değişkeni sınıfınızın üst kısmında tanımlamanız gerekiyor
+        ekDetaylar = value;
       },
       validator: (value) {
         if (value!.isEmpty) {
@@ -563,7 +555,6 @@ class _IlanEkleState extends State<IlanEkle> {
         if (value!.isEmpty) {
           return 'IBAN alanı boş olamaz';
         }
-        // IBAN için ekstra doğrulama yapabilirsiniz.
         return null;
       },
     );
@@ -599,7 +590,7 @@ class _IlanEkleState extends State<IlanEkle> {
     return TextFormField(
       controller: controllers['tamamlanmaOrani'],
       cursorColor: Colors.blue.shade800,
-      keyboardType: TextInputType.number, // Sadece sayısal değer girişi için
+      keyboardType: TextInputType.number,
       decoration: InputDecoration(
         labelText: 'Kampanya Tamamlanma Oranı (%)',
         labelStyle: TextStyle(
@@ -654,7 +645,7 @@ class _IlanEkleState extends State<IlanEkle> {
   TextFormField emailinput() {
     return TextFormField(
       controller: controllers['email'],
-      keyboardType: TextInputType.emailAddress, // E-mail için klavye tipi
+      keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         labelText: 'E-mail',
         labelStyle: TextStyle(
@@ -672,7 +663,6 @@ class _IlanEkleState extends State<IlanEkle> {
         if (value!.isEmpty) {
           return 'E-mail alanı boş olamaz';
         }
-        // E-mail doğrulama işlemleri de burada yapılabilir.
         return null;
       },
     );
@@ -706,7 +696,7 @@ class _IlanEkleState extends State<IlanEkle> {
 
   TextFormField yetkiliadsoyadinput() {
     return TextFormField(
-      controller: controllers['ilgiliadSoyad'], // Burada controller'ı ekledik
+      controller: controllers['ilgiliadSoyad'],
       decoration: InputDecoration(
         labelText: 'Yetkili Ad Soyad',
         labelStyle: TextStyle(

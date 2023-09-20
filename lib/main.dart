@@ -33,10 +33,8 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: (settings) {
         String? userToken = window.localStorage['userToken'];
         if (userToken != null) {
-          // Kullanıcı zaten giriş yapmış, AnaSayfa'ya yönlendir
           return MaterialPageRoute(builder: (context) => Anasayfa());
         } else {
-          // Kullanıcı giriş yapmamış, GirisSayfasi'na yönlendir
           return MaterialPageRoute(builder: (context) => AdminLoginPage());
         }
       },

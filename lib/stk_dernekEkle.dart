@@ -151,7 +151,7 @@ class _DernekEklemeSayfasiState extends State<DernekEklemeSayfasi> {
               ElevatedButton(
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
-                      Colors.white), // Arka plan rengini belirtir
+                      Colors.white), 
                 ),
                 onPressed: _pickLogo,
                 child: Text(

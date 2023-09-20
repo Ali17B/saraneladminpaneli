@@ -66,7 +66,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                 fillColor: Colors.white,
                 border: OutlineInputBorder(
                   borderRadius:
-                      BorderRadius.circular(30), // Kenarları oval yaptık
+                      BorderRadius.circular(30), 
                 ),
               ),
               onSubmitted: (_) => _login(),
@@ -76,13 +76,13 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
               onPressed: _login,
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(
-                    Colors.blue.shade800), // Arkaplan rengini şeffaf yaptık
+                    Colors.blue.shade800), 
                 side: MaterialStateProperty.all(BorderSide(
                     color: Color.fromARGB(255, 54, 50, 50),
                     width: 2)), // Çerçeve ekledik
                 shape: MaterialStateProperty.all(RoundedRectangleBorder(
                   borderRadius:
-                      BorderRadius.circular(30), // Kenarları circular 30 yaptık
+                      BorderRadius.circular(30), 
                 )),
               ),
               child: Text(

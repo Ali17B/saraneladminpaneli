@@ -21,10 +21,10 @@ class _SmaOnayPageState extends State<SmaOnayPage> {
       body: Center(
         child: SingleChildScrollView(
           child: Container(
-            width: 1200, // Kare şeklinin genişliği
-            height: 700, // Kare şeklinin yüksekliği
+            width: 1200, 
+            height: 700, 
             decoration: BoxDecoration(
-              color: Colors.white, // Kare şeklinin kenarlık rengi ve genişliği
+              color: Colors.white, 
             ),
             child: Center(
               child: StreamBuilder(
@@ -105,7 +105,6 @@ class _SmaOnayPageState extends State<SmaOnayPage> {
                                       await sma.add(document.data());
                                       await document.reference.delete();
                                     } catch (e) {
-                                      // Hata işlemleri burada yapılabilir
                                     }
                                   },
                                   child: Text('Onayla'),

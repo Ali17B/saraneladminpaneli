@@ -49,10 +49,10 @@ class Anasayfa extends StatelessWidget {
             Image.asset('assets/logo.png',
                 height: 100,
                 width:
-                    100), // Logo'nuzu buraya koyun (assets klasörüne logo.png olarak kaydedilmelidir)
+                    100), 
             SizedBox(
                 height:
-                    20), // Logo ve metin arasında biraz boşluk bırakmak için
+                    20), 
             Text(
               "Saranel admin panele Hoş Geldiniz",
               style: TextStyle(

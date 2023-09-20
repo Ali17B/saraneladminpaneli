@@ -101,7 +101,7 @@ class _bireyselonayState extends State<bireyselonay> {
                                   await yardimt.add(document.data());
                                   await document.reference.delete();
                                 } catch (e) {
-                                  // Hata işlemleri burada yapılabilir
+                                  //hata işlemleri burada yapılabilir
                                 }
                               },
                               child: Text('Onayla'),
