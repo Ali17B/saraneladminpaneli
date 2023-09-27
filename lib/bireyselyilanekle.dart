@@ -22,12 +22,13 @@ class _BireyselBasvuruEkleState extends State<BireyselBasvuruEkle> {
 
   String adsoyad = '';
   String aciklama = '';
-  String il = '';
+  /* String il = ''; */
   String iletisimadres = '';
   String banka = '';
   String iban = '';
   String alici = '';
   String ibanaciklama = '';
+  String yetkiliadsoyad = '';
 
   Future<void> _uploadImage(int imageNumber) async {
     final FileUploadInputElement uploadInput = FileUploadInputElement();
@@ -67,12 +68,13 @@ class _BireyselBasvuruEkleState extends State<BireyselBasvuruEkle> {
   Map<String, TextEditingController> controllers = {
     'adsoyad': TextEditingController(),
     'aciklama': TextEditingController(),
-    'il': TextEditingController(),
+    /* 'il': TextEditingController(), */
     'iletisimadres': TextEditingController(),
-    'banka' : TextEditingController(),
-    'iban' : TextEditingController(),
-    'alici' : TextEditingController(),
-    'ibanaciklama' : TextEditingController(),
+    'banka': TextEditingController(),
+    'iban': TextEditingController(),
+    'alici': TextEditingController(),
+    'ibanaciklama': TextEditingController(),
+    'yetkiliadsoyad': TextEditingController(),
   };
 
   @override
@@ -80,11 +82,12 @@ class _BireyselBasvuruEkleState extends State<BireyselBasvuruEkle> {
     super.initState();
     controllers['adsoyad']?.text = adsoyad;
     controllers['aciklama']?.text = aciklama;
-    controllers['il']?.text = il;
+    /* controllers['il']?.text = il; */
     controllers['iletisimadres']?.text = iletisimadres;
     controllers['banka']?.text = banka;
     controllers['iban']?.text = iban;
     controllers['alici']?.text = alici;
+    controllers['yetkiliadsoyad']?.text = yetkiliadsoyad;
     controllers['ibanaciklama']?.text = ibanaciklama;
   }
 
@@ -113,11 +116,12 @@ class _BireyselBasvuruEkleState extends State<BireyselBasvuruEkle> {
       yardimtalepleri.add({
         'adsoyad': controllers['adsoyad']?.text,
         'aciklama': controllers['aciklama']?.text,
-        'il': controllers['il']?.text,
+        /* 'il': controllers['il']?.text, */
         'iletisimadres': controllers['iletisimadres']?.text,
         'eklenme_tarihi': formattedDate,
         'banka': controllers['banka']?.text,
         'iban': controllers['iban']?.text,
+        'yetkiliadsoyad': controllers['yetkiliadsoyad']?.text,
         'alici': controllers['alici']?.text,
         'ibanaciklama': controllers['ibanaciklama']?.text,
         'image': _uploadedImageUrl1,
@@ -211,7 +215,7 @@ class _BireyselBasvuruEkleState extends State<BireyselBasvuruEkle> {
                   return null;
                 },
               ),
-              SizedBox(
+              /* SizedBox(
                 height: 15,
               ),
               TextFormField(
@@ -233,7 +237,7 @@ class _BireyselBasvuruEkleState extends State<BireyselBasvuruEkle> {
                   }
                   return null;
                 },
-              ),
+              ), */
               SizedBox(
                 height: 15,
               ),
@@ -345,6 +349,29 @@ class _BireyselBasvuruEkleState extends State<BireyselBasvuruEkle> {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Lütfen bir iletişim adresi giriniz';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              TextFormField(
+                controller: controllers['yetkiliadsoyad'],
+                cursorColor: Colors.blue.shade800,
+                decoration: InputDecoration(
+                  labelText: 'Yetkili AdSoyad',
+                  labelStyle: TextStyle(
+                    color: Colors.blue.shade800,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 12,
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Lütfen bir Yetkili AdSoyad adresi giriniz';
                   }
                   return null;
                 },

@@ -32,6 +32,7 @@ class _IlanEkleState extends State<IlanEkle> {
   String ilgiliadSoyad = '';
   String email = '';
   String telefonNo = '';
+  String bitistarihi = '';
 
   get html => null;
 
@@ -84,6 +85,7 @@ class _IlanEkleState extends State<IlanEkle> {
     'alici': TextEditingController(),
     'aciklama': TextEditingController(),
     'ekDetaylar': TextEditingController(),
+    'bitistarihi': TextEditingController(),
   };
 
   @override
@@ -99,6 +101,7 @@ class _IlanEkleState extends State<IlanEkle> {
     controllers['alici']?.text = alici;
     controllers['aciklama']?.text = aciklama;
     controllers['ekDetaylar']?.text = ekDetaylar;
+    controllers['bitistarihi']?.text = bitistarihi;
   }
 
   @override
@@ -123,6 +126,7 @@ class _IlanEkleState extends State<IlanEkle> {
           bankaAdi.isEmpty ||
           iban.isEmpty ||
           alici.isEmpty ||
+          bitistarihi.isEmpty ||
           aciklama.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Lütfen tüm alanları doldurunuz.')),
@@ -142,6 +146,7 @@ class _IlanEkleState extends State<IlanEkle> {
           'aciklamasi': aciklama,
           'ilgiliadSoyad': ilgiliadSoyad,
           'email': email,
+          'bitistarihi': bitistarihi,
           'telefonNo': telefonNo,
           'detayaciklama': ekDetaylar,
           'image': _uploadedImageUrl1,
@@ -266,8 +271,12 @@ class _IlanEkleState extends State<IlanEkle> {
                 child: adsoyadinput(),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 20, bottom: 40),
+                padding: const EdgeInsets.only(top: 20),
                 child: tamamlanmaoraniinput(),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20, bottom: 40),
+                child: bitistarihiinput(),
               ),
               Row(children: <Widget>[
                 Expanded(
@@ -611,6 +620,51 @@ class _IlanEkleState extends State<IlanEkle> {
         if (oran == null || oran < 0 || oran > 100) {
           return 'Lütfen 0 ile 100 arasında bir değer girin';
         }
+        return null;
+      },
+    );
+  }
+
+  TextFormField bitistarihiinput() {
+    return TextFormField(
+      controller: controllers['bitistarihi'],
+      cursorColor: Colors.blue.shade800,
+      keyboardType: TextInputType.number,
+      decoration: InputDecoration(
+        labelText: 'Kampanya Bitiş Tarihi (gg.aa.yyyy)',
+        labelStyle: TextStyle(
+          color: Colors.blue.shade800,
+          fontSize: 12,
+          fontWeight: FontWeight.w400,
+        ),
+        filled: true,
+        fillColor: Colors.white,
+      ),
+      onChanged: (value) {
+        bitistarihi = value;
+      },
+      validator: (value) {
+        if (value!.isEmpty) {
+          return 'Kampanya Bitiş Tarihi alanı boş olamaz';
+        }
+        final RegExp datePattern = RegExp(r'^\d{2}\.\d{2}\.\d{4}$');
+
+        final bool isValid = datePattern.hasMatch(value);
+        if (!isValid) {
+          return 'Lütfen tarihi gg.aa.yyyy formatında girin';
+        }
+        final parts = value.split('.');
+        final day = int.parse(parts[0]);
+        final month = int.parse(parts[1]);
+
+        if (day < 1 || day > 31) {
+          return 'Gün 1 ile 31 arasında olmalıdır';
+        }
+
+        if (month < 1 || month > 12) {
+          return 'Ay 1 ile 12 arasında olmalıdır';
+        }
+
         return null;
       },
     );

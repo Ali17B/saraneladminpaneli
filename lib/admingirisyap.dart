@@ -44,6 +44,14 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
         child: Column(
           children: [
             SizedBox(height: 20),
+            Text(
+              'Saranel Platformu \n     Admin Panel',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25),
+            ),
+            SizedBox(height: 20),
             Center(
               child: TextField(
                 controller: _usernameController,
@@ -65,8 +73,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                 labelText: 'Şifre',
                 fillColor: Colors.white,
                 border: OutlineInputBorder(
-                  borderRadius:
-                      BorderRadius.circular(30), 
+                  borderRadius: BorderRadius.circular(30),
                 ),
               ),
               onSubmitted: (_) => _login(),
@@ -75,14 +82,13 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
             ElevatedButton(
               onPressed: _login,
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                    Colors.blue.shade800), 
+                backgroundColor:
+                    MaterialStateProperty.all(Colors.blue.shade800),
                 side: MaterialStateProperty.all(BorderSide(
                     color: Color.fromARGB(255, 54, 50, 50),
                     width: 2)), // Çerçeve ekledik
                 shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.circular(30), 
+                  borderRadius: BorderRadius.circular(30),
                 )),
               ),
               child: Text(
